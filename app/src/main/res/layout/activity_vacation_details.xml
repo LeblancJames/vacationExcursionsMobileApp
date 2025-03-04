@@ -26,7 +26,7 @@
         android:id="@+id/scrollView"
         android:layout_width="409dp"
         android:layout_height="889dp"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="52dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -54,6 +54,25 @@
                     android:layout_width="84dp"
                     android:layout_height="50dp"
                     android:hint="name"></EditText>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="enter start date"
+                        android:padding="10dp"
+                        android:text="Start date: "></TextView>
+
+                    <EditText
+                        android:id="@+id/startdatetext"
+                        android:layout_width="84dp"
+                        android:layout_height="50dp"
+                        android:hint="start date"></EditText>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -65,13 +84,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:padding="10dp"
-                    android:text="price: "></TextView>
+                    android:text="hotel: "></TextView>
 
                 <EditText
-                    android:id="@+id/pricetext"
+                    android:id="@+id/hoteltext"
                     android:layout_width="78dp"
                     android:layout_height="50dp"
-                    android:hint="price"></EditText>
+                    android:hint="hotel"></EditText>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="enter end date"
+                        android:padding="10dp"
+                        android:text="end date: "></TextView>
+
+                    <EditText
+                        android:id="@+id/enddatetext"
+                        android:layout_width="84dp"
+                        android:layout_height="50dp"
+                        android:hint="end date"></EditText>
+                </LinearLayout>
             </LinearLayout>
 
 

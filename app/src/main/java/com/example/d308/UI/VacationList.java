@@ -30,11 +30,11 @@ private Repository repository;
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_vacation_list);
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
-//        });
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
 
         repository=new Repository(getApplication());
@@ -80,9 +80,9 @@ private Repository repository;
         if(item.getItemId()==R.id.sample){
             repository=new Repository(getApplication());
             //Toast.makeText(VacationList.this, "put in sample data", Toast.LENGTH_LONG).show();
-            Vacation vacation = new Vacation(0, "bahamas", 100.0);
+            Vacation vacation = new Vacation(0, "bahamas", "Mariott", "3/4/25", "4/4/25");
             repository.insert(vacation);
-            vacation = new Vacation(0, "italy", 100.0);
+            vacation = new Vacation(0, "italy", "Hilton", "4/4/25", "5/4/25");
             repository.insert(vacation);
             Excursion excursion= new Excursion(0, "pizza tour", 10, 1);
             repository.insert(excursion);

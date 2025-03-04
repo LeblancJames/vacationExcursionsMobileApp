@@ -29,10 +29,17 @@ public class VacationDetails extends AppCompatActivity {
 
 
     String name;
-    double price;
+    String hotel;
+
+    String startDate;
+    String endDate;
+
     int vacationID;
     EditText editName;
-    EditText editPrice;
+    EditText editHotel;
+    EditText editStartDate;
+    EditText editEndDate;
+
     Repository repository;
     Vacation currentVacation;
     int numExcursions;
@@ -50,11 +57,17 @@ public class VacationDetails extends AppCompatActivity {
         FloatingActionButton fab=findViewById(R.id.floatingActionButton4);
 
         editName=findViewById(R.id.titletext);
-        editPrice=findViewById(R.id.pricetext);
+        editHotel=findViewById(R.id.hoteltext);
+        editStartDate=findViewById(R.id.startdatetext);
+        editEndDate=findViewById(R.id.enddatetext);
         name=getIntent().getStringExtra("name");
-        price=getIntent().getDoubleExtra("price",0.0);
+        hotel=getIntent().getStringExtra("hotel");
+        startDate=getIntent().getStringExtra("start date");
+        endDate=getIntent().getStringExtra("end date");
         editName.setText(name);
-        editPrice.setText(Double.toString(price));
+        editHotel.setText(hotel);
+        editStartDate.setText(startDate);
+        editEndDate.setText(endDate);
         vacationID=getIntent().getIntExtra("id",-1);
 
 
@@ -98,13 +111,14 @@ public class VacationDetails extends AppCompatActivity {
                 else {
                     vacationID = repository.getAllVacations().get(repository.getAllVacations().size() - 1).getVacationID() + 1;
                 }
-                vacation = new Vacation(vacationID, editName.getText().toString(), Double.parseDouble(editPrice.getText().toString()));
+                vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
                 repository.insert(vacation);
                 this.finish();
             }
             else{
-                    vacation = new Vacation(vacationID, editName.getText().toString(), Double.parseDouble(editPrice.getText().toString()));
-                    repository.update(vacation);
+                vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
+                repository.insert(vacation);
+                repository.update(vacation);
 
             }
         }

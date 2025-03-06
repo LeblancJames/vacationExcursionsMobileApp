@@ -254,27 +254,66 @@ public class VacationDetails extends AppCompatActivity {
         }
 
         if(item.getItemId()== R.id.vacationNotify) {
+            String vacationTitle = editName.getText().toString();
             String dateFromScreen = editStartDate.getText().toString();
+            String dateFromScreen2 = editEndDate.getText().toString();
+
             String myFormat = "MM/dd/yy"; //In which you need put here
             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
             Date myDate = null;
+            Date myDate2 = null;
             try {
                 myDate = sdf.parse(dateFromScreen);
+                myDate2 = sdf.parse(dateFromScreen2);
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             try{
                 Long trigger = myDate.getTime();
+                Long trigger2 = myDate2.getTime();
                 Intent intent = new Intent(VacationDetails.this, MyReceiver.class);
-                intent.putExtra("key", "vacation starting");
+                intent.putExtra("key", "starting");
+                intent.putExtra("title", vacationTitle);
+
                 PendingIntent sender = PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);}
+                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+
+
+                intent = new Intent(VacationDetails.this, MyReceiver.class);
+                intent.putExtra("key", "ending");
+                intent.putExtra("title", vacationTitle);
+                sender = PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE);
+                alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger2, sender);
+            }
             catch (Exception e){
                 throw new RuntimeException(e);
             }
             return true;
         }
+
+        if (item.getItemId()== R.id.vacationShare) {
+            String vacationTitle = editName.getText().toString();
+            String hotel = editHotel.getText().toString();
+            String startDate = editStartDate.getText().toString();
+            String endDate = editEndDate.getText().toString();
+
+            String finalMessage;
+
+            finalMessage = "Your vacation is at " + hotel + ". " + " It starts on " + startDate + " and ends on "
+            + endDate;
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TITLE, vacationTitle);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, finalMessage);
+            sendIntent.setType("text/plain");
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            startActivity(shareIntent);
+            return true;
+        }
+
 
         return true;
     }

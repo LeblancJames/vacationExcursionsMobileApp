@@ -22,12 +22,17 @@ public class MyReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, intent.getStringExtra("key"), Toast.LENGTH_LONG).show();
+        String vacationTitle = intent.getStringExtra("title");
+        String alertType = intent.getStringExtra("key");
+        String message = vacationTitle + "trip is " + alertType + " today!";
+
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
         createNotificationChannel(context, channel_id);
         Notification n = new NotificationCompat.Builder(context, channel_id)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentText(intent.getStringExtra("key"))
-                .setContentTitle("NotificationTest").build();
+                .setContentText(intent.getStringExtra(message))
+                .setContentTitle("Vacation Notification").build();
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(notificationID++, n);
     }
@@ -36,8 +41,8 @@ public class MyReceiver extends BroadcastReceiver {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //            CharSequence name = context.getResources().getString(R.string.channel_name);
 //            String description = context.getString(R.string.channel_description);
-            CharSequence name = "mychannelname";
-            String description = "mychanneldescription";
+            CharSequence name = "Vacation Alerts";
+            String description = "Notifications for vacation start and end dates";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);

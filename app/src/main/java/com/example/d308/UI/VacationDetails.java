@@ -127,16 +127,31 @@ public class VacationDetails extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 try {
-                    String startDateInfo=editStartDate.getText().toString();
+
+                    Calendar selectedDate = Calendar.getInstance();
+                    selectedDate.set(Calendar.YEAR, year);
+                    selectedDate.set(Calendar.MONTH, month);
+                    selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    String newStartDateStr = sdf.format(selectedDate.getTime());
+
+//                    String startDateInfo=editStartDate.getText().toString();
                     String endDateInfo=editEndDate.getText().toString();
-                    if (sdf.parse(startDateInfo).before(sdf.parse(endDateInfo))) {
-                        myCalender.set(Calendar.YEAR, year);
-                        myCalender.set(Calendar.MONTH, month);
-                        myCalender.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        updateStartLabel();
-                    } else {
-                        Toast.makeText(view.getContext(), "Start date cannot be after end date!", Toast.LENGTH_LONG).show();
+
+                    if (!endDateInfo.isEmpty()) {
+                        Date newStartDate = sdf.parse(newStartDateStr);
+                        Date endDate = sdf.parse(endDateInfo);
+
+                        if (newStartDate.after(endDate)) {
+                            Toast.makeText(view.getContext(), "Start date cannot be after end date!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
                     }
+                    myCalender.set(Calendar.YEAR, year);
+                    myCalender.set(Calendar.MONTH, month);
+                    myCalender.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    updateStartLabel();
+
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
@@ -163,16 +178,34 @@ public class VacationDetails extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 try {
+
+                    Calendar selectedDate = Calendar.getInstance();
+                    selectedDate.set(Calendar.YEAR, year);
+                    selectedDate.set(Calendar.MONTH, month);
+                    selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    String newEndDateStr = sdf.format(selectedDate.getTime());
+
+
                     String startDateInfo=editStartDate.getText().toString();
-                    String endDateInfo=editEndDate.getText().toString();
-                    if (sdf.parse(startDateInfo).before(sdf.parse(endDateInfo))) {
-                        myCalender.set(Calendar.YEAR, year);
-                        myCalender.set(Calendar.MONTH, month);
-                        myCalender.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        updateEndLabel();
-                    } else {
-                        Toast.makeText(view.getContext(), "Start date cannot be after end date!", Toast.LENGTH_LONG).show();
+//                    String endDateInfo=editEndDate.getText().toString();
+
+                    if (!startDateInfo.isEmpty()) {
+                        Date startDate = sdf.parse(startDateInfo);
+                        Date newEndDate = sdf.parse(newEndDateStr);
+
+                        if (newEndDate.before(startDate)) {
+                            Toast.makeText(view.getContext(), "Start date cannot be after end date!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
                     }
+
+
+                    myCalender.set(Calendar.YEAR, year);
+                    myCalender.set(Calendar.MONTH, month);
+                    myCalender.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    updateEndLabel();
+
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }

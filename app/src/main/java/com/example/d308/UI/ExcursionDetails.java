@@ -16,6 +16,8 @@ import com.example.d308.entities.Excursion;
 import com.example.d308.entities.Vacation;
 
 public class ExcursionDetails extends AppCompatActivity {
+    String excursionName;
+    String excursionDate;
     int excursionID;
     Repository repository;
     @Override
@@ -28,6 +30,8 @@ public class ExcursionDetails extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        excursionName = getIntent().getStringExtra("name");
+        excursionDate=getIntent().getStringExtra("excursion date");
         repository = new Repository(getApplication());
         excursionID=getIntent().getIntExtra("id",-1);
     }

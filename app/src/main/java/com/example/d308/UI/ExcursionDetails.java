@@ -55,8 +55,8 @@ public class ExcursionDetails extends AppCompatActivity {
         excursionName = getIntent().getStringExtra("name");
         excursionDate=getIntent().getStringExtra("excursion date");
         repository = new Repository(getApplication());
-        excursionID=getIntent().getIntExtra("id",-1);
-        vacationID=getIntent().getIntExtra("VacationID",-1);
+        excursionID=getIntent().getIntExtra("excursionID",-1);
+        vacationID=getIntent().getIntExtra("id",-1);
         editExcursionTitleText = findViewById(R.id.excursionTitleText);
         editExcursionDateText = findViewById(R.id.excursionDateText);
         editExcursionTitleText.setText(excursionName);
@@ -92,6 +92,7 @@ public class ExcursionDetails extends AppCompatActivity {
                             currentVacation = vacation;
                         }
                     }
+                    System.out.println(repository.getAllVacations());
                     String startDateInfo = currentVacation.getStartDate();
                     String endDateInfo = currentVacation.getEndDate();
 

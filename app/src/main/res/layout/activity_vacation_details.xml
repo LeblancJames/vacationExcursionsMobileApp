@@ -65,13 +65,15 @@
                         android:layout_height="wrap_content"
                         android:contentDescription="enter start date"
                         android:padding="10dp"
-                        android:text="Start date: "></TextView>
+                        android:text="Start date: "
+                        ></TextView>
 
                     <EditText
                         android:id="@+id/startdatetext"
                         android:layout_width="84dp"
                         android:layout_height="50dp"
-                        android:hint="start date"></EditText>
+                        android:hint="start date"
+                        android:inputType="date"></EditText>
                 </LinearLayout>
             </LinearLayout>
 
@@ -108,7 +110,8 @@
                         android:id="@+id/enddatetext"
                         android:layout_width="84dp"
                         android:layout_height="50dp"
-                        android:hint="end date"></EditText>
+                        android:hint="end date"
+                        android:inputType="date"></EditText>
                 </LinearLayout>
             </LinearLayout>
 

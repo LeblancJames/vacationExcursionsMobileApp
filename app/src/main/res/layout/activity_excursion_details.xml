@@ -55,7 +55,8 @@
             android:id="@+id/excursionDateText"
             android:layout_width="84dp"
             android:layout_height="50dp"
-            android:hint="Excursion date"></EditText>
+            android:hint="Excursion date"
+            android:inputType="date"></EditText>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

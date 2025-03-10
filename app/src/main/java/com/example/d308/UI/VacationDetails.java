@@ -6,6 +6,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -100,6 +102,26 @@ public class VacationDetails extends AppCompatActivity {
 
         fab.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
+
+                Vacation vacation;
+                if(vacationID==-1){
+                    if(repository.getAllVacations().size() == 0) {
+
+                        vacationID = 1;
+                    }
+                    else {
+                        vacationID = repository.getAllVacations().get(repository.getAllVacations().size() - 1).getVacationID() + 1;
+                    }
+                    vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
+                    repository.insert(vacation);
+                }
+                else{
+                    vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
+                    repository.insert(vacation);
+                    repository.update(vacation);
+
+                }
+
                 Intent intent=new Intent(VacationDetails.this, ExcursionDetails.class);
                 intent.putExtra("id", vacationID);
                 startActivity(intent);
@@ -211,7 +233,35 @@ public class VacationDetails extends AppCompatActivity {
                 }
             }
         };
+        editStartDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!s.toString().matches("\\d{0,2}/\\d{0,2}/\\d{0,2}")) {
+                    editStartDate.setError("Invalid date format. Use MM/DD/YY");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        editEndDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!s.toString().matches("\\d{0,2}/\\d{0,2}/\\d{0,2}")) {
+                    editEndDate.setError("Invalid date format. Use MM/DD/YY");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
     }
     private void updateStartLabel(){
         String myFormat = "MM/dd/yy";

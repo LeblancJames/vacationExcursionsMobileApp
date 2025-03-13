@@ -239,13 +239,18 @@ public class VacationDetails extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().matches("\\d{0,2}/\\d{0,2}/\\d{0,2}")) {
-                    editStartDate.setError("Invalid date format. Use MM/DD/YY");
+                if (!isValidDate(s.toString())) {
+                    editEndDate.setError("Invalid date.");
                 }
+
+
+
+
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         editEndDate.addTextChangedListener(new TextWatcher() {
@@ -254,15 +259,41 @@ public class VacationDetails extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().matches("\\d{0,2}/\\d{0,2}/\\d{0,2}")) {
-                    editEndDate.setError("Invalid date format. Use MM/DD/YY");
+                if (!isValidDate(s.toString())) {
+                    editEndDate.setError("Invalid date.");
                 }
+
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+
+            }
         });
     }
+
+
+    private boolean isValidDate(String dateStr) {
+        if (!dateStr.matches("\\d{0,2}/\\d{0,2}/\\d{0,2}")) {
+            return false;
+        }
+
+        String[] parts = dateStr.split("/");
+        int month = Integer.parseInt(parts[0]);
+        int day = Integer.parseInt(parts[1]);
+
+        if (month < 1 || month > 12) {
+            return false;
+        }
+
+        if (day < 1 || day > 31) {
+            return false;
+        }
+
+        return true;
+    }
+
+
     private void updateStartLabel(){
         String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);

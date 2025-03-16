@@ -240,7 +240,7 @@ public class VacationDetails extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!isValidDate(s.toString())) {
-                    editEndDate.setError("Invalid date.");
+                    editStartDate.setError("Invalid date.");
                 }
 
 

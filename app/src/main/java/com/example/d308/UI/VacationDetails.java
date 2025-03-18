@@ -328,11 +328,23 @@ public class VacationDetails extends AppCompatActivity {
                 else {
                     vacationID = repository.getAllVacations().get(repository.getAllVacations().size() - 1).getVacationID() + 1;
                 }
+                if (editName.getText().toString().isEmpty()){
+                    editName.setError("Title is required!");
+                }
+                if (editHotel.getText().toString().isEmpty()){
+                    editHotel.setError("Hotel is required!");
+                }
                 vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
                 repository.insert(vacation);
                 this.finish();
             }
             else{
+                if (editName.getText().toString().isEmpty()){
+                    editName.setError("Title is required!");
+                }
+                if (editHotel.getText().toString().isEmpty()){
+                    editHotel.setError("Hotel is required!");
+                }
                 vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
                 repository.insert(vacation);
                 repository.update(vacation);

@@ -25,10 +25,13 @@ import com.example.d308.entities.Excursion;
 import com.example.d308.entities.Vacation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.type.Date;
+import com.google.type.DateTime;
 
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
@@ -135,7 +138,9 @@ private VacationAdapter vacationAdapter;
     public void LogReport(List<Vacation> vacationsList){
 
         Log.d("VacationLog", "------ Vacation List Report ------");
-
+        LocalDateTime now = LocalDateTime.now();
+        String formatted = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Log.d("VacationLog", "Current time: " + formatted);
         for (Vacation vacation : vacationsList) {
             String logEntry = "ID: " + vacation.getVacationID() +
                     ", Name: " + vacation.getVacationName() +

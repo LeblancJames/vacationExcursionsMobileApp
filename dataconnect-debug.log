@@ -1,0 +1,15 @@
+I0324 09:47:19.428692   11436 load.go:37] Reloading schema and connectors...
+I0324 09:47:19.447123   11436 control.go:59] [/emulator/d308android 8287] UpdateResources(): done
+Schema: sources: schema\schema.gql [2088B] 
+Connector "default": sources: connector\mutations.gql [1233B] connector\queries.gql [1802B] 
+I0324 09:47:19.456448   11436 codegen.go:82] [connector "default" kotlinSdk] Generating sources into "C:\\Users\\jship\\OneDrive\\Desktop\\WGU\\D308android\\app\\src\\main\\java\\connectors\\default"
+I0324 09:47:19.456448   11436 collector.go:107] schema extensions wrote into "C:\\Users\\jship\\OneDrive\\Desktop\\WGU\\D308android\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [66094B] 
+I0324 09:47:19.456448   11436 collector.go:107] connector "default" kotlinSdk wrote into "C:\\Users\\jship\\OneDrive\\Desktop\\WGU\\D308android\\app\\src\\main\\java\\connectors\\default"
+Generated sources: DefaultConnector.kt [8306B] DefaultConnectorKeys.kt [799B] DefaultConnectorEnums.kt [797B] 
+I0324 09:47:19.456448   11436 load.go:115] Finished reloading
+I0324 09:47:19.462633   11436 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:9399
+I0324 09:47:19.462633   11436 dev.go:95] Listening on address (HTTP + gRPC): [::1]:9399
+I0324 09:47:23.345104   11436 control.go:59] [/emulator/d308android 7043] UpdateResources(): done
+Schema: sources: schema\schema.gql [2088B] 
+Connector "default": sources: connector\mutations.gql [1233B] connector\queries.gql [1802B] 

@@ -6,4 +6,6 @@
         android:id="@+id/sample"/>
     <item android:title="Item"
         android:id="@+id/item"/>
+    <item android:title="Report"
+        android:id="@+id/createReport"/>
 </menu>

@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.protolite.well.known.types)
     val room_version = "2.6.1"
 
     implementation(libs.appcompat)

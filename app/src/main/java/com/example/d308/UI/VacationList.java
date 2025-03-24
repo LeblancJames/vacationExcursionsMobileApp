@@ -2,6 +2,7 @@ package com.example.d308.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,10 +24,13 @@ import com.example.d308.database.Repository;
 import com.example.d308.entities.Excursion;
 import com.example.d308.entities.Vacation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.type.Date;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class VacationList extends AppCompatActivity {
 private Repository repository;
@@ -117,7 +121,31 @@ private VacationAdapter vacationAdapter;
             this.finish();//this tells backarrow to go back to previous screen, you can override with Intent
             return true;
         }
+        if(item.getItemId()==R.id.createReport){
+            repository=new Repository(getApplication());
+            List<Vacation> allVacations=repository.getAllVacations();
+            LogReport(allVacations);
+            return true;
+        }
         return true;
+    }
+
+
+
+    public void LogReport(List<Vacation> vacationsList){
+
+        Log.d("VacationLog", "------ Vacation List Report ------");
+
+        for (Vacation vacation : vacationsList) {
+            String logEntry = "ID: " + vacation.getVacationID() +
+                    ", Name: " + vacation.getVacationName() +
+                    ", Hotel: " + vacation.getHotel() +
+                    ", Start: " + vacation.getStartDate() +
+                    ", End: " + vacation.getEndDate();
+            Log.d("VacationLog", logEntry);
+        }
+        Log.d("VacationLog", "------ End of Report ------");
+
     }
 
 }
